@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"net/http"
+	"log"
 
 	"github.com/aebalz/go-gin-starter/config"
+	"github.com/aebalz/go-gin-starter/internal/book/handlers"
 	"github.com/aebalz/go-gin-starter/internal/book/models"
 	"github.com/aebalz/go-gin-starter/internal/book/repositories"
 	"github.com/aebalz/go-gin-starter/internal/book/services"
@@ -25,25 +26,15 @@ func main() {
 	// Initialize the services with the repository
 	bookService := services.NewBookService(bookRepo)
 
+	// Set up the Gin router
 	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "pong",
-		})
-	})
 
-	api := r.Group("/api/v1")
-	{
-		books := api.Group("/books")
-		{
-			books.GET("/", bookService.GetBooks)
-			books.GET("/:id", bookService.GetBook)
-			books.POST("/", bookService.CreateBook)
-			books.PUT("/:id", bookService.UpdateBook)
-			books.PATCH("/:id", bookService.UpdateBook)
-			books.DELETE("/:id", bookService.DeleteBook)
-		}
+	// Register routes
+	handlers.RegisterBookRoutes(r, bookService)
+
+	// Run the server
+	if err := r.Run(":8000"); err != nil {
+		log.Fatalf("failed to start server: %v", err)
 	}
 
-	r.Run(":8000") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
