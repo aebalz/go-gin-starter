@@ -1,0 +1,46 @@
+services:
+  # redis:
+  #   image: redis:latest  # Use the latest official Redis image from Docker Hub
+  #   container_name: redis-container  # Name the container
+  #   ports:
+  #     - "6379:6379"  # Map port 6379 on the host to port 6379 in the container
+  #   volumes:
+  #     - redis-data:/data  # Persist data in a named volume
+
+  postgres:
+    image: postgres:16.3-alpine3.20
+    hostname: postgres
+    container_name: postgres-container
+    environment:
+      POSTGRES_DB: go_gin_starter
+      POSTGRES_USER: aebalz
+      POSTGRES_PASSWORD: 12345678
+    ports:
+      - "5432:5432"
+    networks:
+      - infra
+    # volumes:
+    #   - postgres-data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: aebalz@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8080:80"
+    depends_on:
+      - postgres
+    networks:
+      - infra
+
+# volumes:
+#   # redis-data:
+#   #   driver: local  # Use the local driver (this line is optional but clarifies the intent)
+#   postgres-data:
+#     driver: local
+
+networks:
+  infra:
+    driver: bridge
