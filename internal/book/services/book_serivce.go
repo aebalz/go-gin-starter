@@ -9,16 +9,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// var books = []models.Book{
-// 	{
-// 		Title:     "AA",
-// 		Author:    "BB",
-// 		Publisher: "11",
-// 		// PublishedAt: ,
-// 		Price: 101.99,
-// 	},
-// }
-
 // BookService defines the methods that a book service should implement
 type BookService interface {
 	GetBooks(c *gin.Context)
@@ -118,9 +108,9 @@ func (s *bookService) PatchBook(c *gin.Context) {
 	if title, exists := bookUpdates["title"]; exists {
 		book.Title = title.(string)
 	}
-	if author, exists := bookUpdates["author"]; exists {
-		book.Author = author.(string)
-	}
+	// if author, exists := bookUpdates["author"]; exists {
+	// 	book.Author = author.(string)
+	// }
 	if publisher, exists := bookUpdates["publisher"]; exists {
 		book.Publisher = publisher.(string)
 	}

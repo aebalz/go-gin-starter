@@ -5,17 +5,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func RegisterBookRoutes(r *gin.Engine, bookService services.BookService) {
-	api := r.Group("/api/v1")
+func RegisterBookRoutes(r *gin.RouterGroup, bookService services.BookService) {
+	books := r.Group("/books")
 	{
-		books := api.Group("/books")
-		{
-			books.GET("/", bookService.GetBooks)
-			books.GET("/:id", bookService.GetBook)
-			books.POST("/", bookService.CreateBook)
-			books.PUT("/:id", bookService.UpdateBook)
-			books.PATCH("/:id", bookService.PatchBook)
-			books.DELETE("/:id", bookService.DeleteBook)
-		}
+		books.GET("/", bookService.GetBooks)
+		books.GET("/:id", bookService.GetBook)
+		books.POST("/", bookService.CreateBook)
+		books.PUT("/:id", bookService.UpdateBook)
+		books.PATCH("/:id", bookService.PatchBook)
+		books.DELETE("/:id", bookService.DeleteBook)
 	}
 }
