@@ -4,7 +4,6 @@ go 1.21.12
 
 require (
 	github.com/gin-gonic/gin v1.10.0
-	github.com/go-oauth2/gin-server v1.1.0
 	github.com/go-oauth2/oauth2/v4 v4.5.2
 	github.com/go-playground/validator/v10 v10.22.0
 	github.com/nouhoum/go-oauth2-gorm/v4 v4.0.0
