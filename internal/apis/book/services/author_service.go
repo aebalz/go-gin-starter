@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/aebalz/go-gin-starter/internal/book/models"
-	"github.com/aebalz/go-gin-starter/internal/book/repositories"
+	"github.com/aebalz/go-gin-starter/internal/apis/book/models"
+	"github.com/aebalz/go-gin-starter/internal/apis/book/repositories"
 	"github.com/gin-gonic/gin"
 )
 

@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"github.com/aebalz/go-gin-starter/internal/book/services"
+	"github.com/aebalz/go-gin-starter/internal/apis/book/services"
 	"github.com/gin-gonic/gin"
 )
 
