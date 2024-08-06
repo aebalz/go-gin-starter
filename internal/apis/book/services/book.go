@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/aebalz/go-gin-starter/internal/book/models"
-	"github.com/aebalz/go-gin-starter/internal/book/repositories"
+	"github.com/aebalz/go-gin-starter/internal/apis/book/models"
+	"github.com/aebalz/go-gin-starter/internal/apis/book/repositories"
 	"github.com/gin-gonic/gin"
 )
 
@@ -30,7 +30,7 @@ func NewBookService(repo repositories.BookRepository) BookService {
 }
 
 func (s *bookService) GetBooks(c *gin.Context) {
-	books, err := s.repo.FindAll()
+	books, err := s.repo.FindAll(c)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return

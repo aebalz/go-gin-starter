@@ -31,12 +31,7 @@ func LoadConfig() error {
 	}
 
 	AppConfig = Config{
-		AppPort: viper.GetString("app.port"),
-		// RedisURL:      viper.GetString("redis.url"),
-		// RedisUser:     viper.GetString("redis.user"),
-		// RedisPassword: viper.GetString("redis.password"),
-		// RedisDatabase: viper.GetInt("redis.database"),
-
+		AppPort:          viper.GetString("app.port"),
 		PostgresDb:       viper.GetString("postgresql.postgres_db"),
 		PostgresUser:     viper.GetString("postgresql.postgres_user"),
 		PostgresPassword: viper.GetString("postgresql.postgres_password"),

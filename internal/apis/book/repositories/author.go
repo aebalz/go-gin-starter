@@ -3,7 +3,7 @@ package repositories
 import (
 	"fmt"
 
-	"github.com/aebalz/go-gin-starter/internal/book/models"
+	"github.com/aebalz/go-gin-starter/internal/apis/book/models"
 	"gorm.io/gorm"
 )
 
