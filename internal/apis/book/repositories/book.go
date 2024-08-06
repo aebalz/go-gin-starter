@@ -2,6 +2,8 @@ package repositories
 
 import (
 	"github.com/aebalz/go-gin-starter/internal/apis/book/models"
+	"github.com/aebalz/go-gin-starter/utils"
+	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
 
@@ -9,7 +11,7 @@ import (
 // data storage provider needs to implement to get
 // and store books
 type BookRepository interface {
-	FindAll() ([]models.Book, error)
+	FindAll(c *gin.Context) ([]models.Book, error)
 	FindByID(id uint) (models.Book, error)
 	Create(book models.Book) (models.Book, error)
 	Update(book models.Book) (models.Book, error)
@@ -26,9 +28,9 @@ func NewBookRepository(db *gorm.DB) BookRepository {
 	return &bookRepository{db}
 }
 
-func (r *bookRepository) FindAll() ([]models.Book, error) {
+func (r *bookRepository) FindAll(c *gin.Context) ([]models.Book, error) {
 	var books []models.Book
-	result := r.db.Find(&books)
+	result := r.db.Scopes(utils.Paginate(c)).Find(&books)
 	return books, result.Error
 }
 

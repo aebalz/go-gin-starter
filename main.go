@@ -9,6 +9,7 @@ import (
 	"github.com/aebalz/go-gin-starter/pkg/db"
 	"github.com/aebalz/go-gin-starter/pkg/server"
 	"github.com/gin-gonic/gin"
+	pagination "github.com/webstradev/gin-pagination"
 )
 
 func main() {
@@ -21,6 +22,8 @@ func main() {
 
 	// Set up the Gin router
 	r := gin.Default()
+
+	r.Use(pagination.Default())
 
 	// Initialize services and routes
 	book.Init(db, r)

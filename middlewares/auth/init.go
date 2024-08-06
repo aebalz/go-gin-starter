@@ -1,9 +1,6 @@
 package auth
 
 import (
-	"context"
-	"fmt"
-
 	"github.com/gin-gonic/gin"
 	"github.com/go-oauth2/oauth2/v4/manage"
 	"github.com/go-oauth2/oauth2/v4/server"
@@ -31,12 +28,12 @@ func Init(db *gorm.DB, r *gin.Engine) {
 
 	// Use GORM client store
 	clientStore := gooauth2gorm.NewClientStoreWithDB(authConfig, db, "")
-	// manager.MapClientStorage(clientStore)
-	token, err := clientStore.GetByID(context.Background(), "YGvMeedZPKeByrnZfypTaV1UKOz9YpQANvh4DEXL")
-	fmt.Println("token >>>> ", token)
-	if err != nil {
-		fmt.Println(err.Error())
-	}
+	manager.MapClientStorage(clientStore)
+	// token, err := clientStore.GetByID(context.Background(), "YGvMeedZPKeByrnZfypTaV1UKOz9YpQANvh4DEXL")
+	// fmt.Println("token >>>> ", token)
+	// if err != nil {
+	// 	fmt.Println(err.Error())
+	// }
 
 	// Initialize the oauth2 service
 	// ginserver.InitServer(manager)

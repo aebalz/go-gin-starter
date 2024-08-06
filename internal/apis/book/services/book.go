@@ -30,7 +30,7 @@ func NewBookService(repo repositories.BookRepository) BookService {
 }
 
 func (s *bookService) GetBooks(c *gin.Context) {
-	books, err := s.repo.FindAll()
+	books, err := s.repo.FindAll(c)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
